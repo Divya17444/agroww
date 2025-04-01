@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agroww - Premium Agricultural Rentals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #2E8B57;
+            --secondary: #FFD700;
+            --accent: #8FBC8F;
+            --light: #F0FFF0;
+            --dark: #2F4F4F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            padding-top: 70px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: var(--light);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        section {
+            padding: 3rem 0;
+            margin-top: 20px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+            background-color: beige;
+            flex-direction: column;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+        }
+
+        .hero button {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .equipment,
+        .booking,
+        .contact,
+        #payment {
+            background-color: var(--light);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 3rem;
+        }
+
+        .equipment h2,
+        .booking h2,
+        .contact h2,
+        #payment h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .equipment-item {
+            margin-bottom: 2rem;
+        }
+
+        .equipment img {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .contact form,
+        .booking form,
+        #payment form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .contact input,
+        .contact textarea,
+        .contact button,
+        .booking input,
+        .booking select,
+        .booking button,
+        #payment input,
+        #payment button {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--dark);
+            width: 100%;
+        }
+
+        .contact button,
+        .booking button,
+        #payment button {
+            background-color: var(--secondary);
+            color: var(--dark);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--light);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            z-index: 1001;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .popup h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .popup form input,
+        .popup form button {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--dark);
+            width: 100%;
+        }
+
+        .popup form button {
+            background-color: var(--secondary);
+            color: var(--dark);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        #equipment {
+            margin-bottom: 50px;
+        }
+
+        #booking {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        #booking form {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #payment {
+            display: none; /* Initially hide the payment page */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Agroww<span>.</span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#equipment">Equipment</a>
+                <a href="#booking">Booking</a>
+                <a href="#contact">Contact</a>
+                <a href="#" onclick="showPopup('login-signup-popup')">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Modern Agricultural Solutions</h1>
+            <p>Premium equipment rentals for professional farming operations</p>
+            <button onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });">Book Now</button>
+        </div>
+    </section>
+
+    <section class="equipment" id="equipment">
+        <h2>Our Equipment</h2>
+        <div class="equipment-item">
+            <img src="tractor.jpg" alt="Tractor">
+            <p>Tractors - Powerful machines for large-scale farming.</p>
+        </div>
+        <div class="equipment-item">
+            <img src="ch.jpg" alt="Combine Harvester">
+            <p>Combine Harvesters - Efficient harvesting solutions.</p>
+        </div>
+        <div class="equipment-item">
+            <img src="plough.jpg" alt="Plough">
+            <p>Ploughs - High-performance ploughing equipment.</p>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <h2>Booking Form</h2>
+        <form id="booking-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="phone" placeholder="Your Phone Number" required>
+            <label for="equipment">Choose Equipment:</label>
+            <select name="equipment" id="equipment" required>
+                <option value="tractor">Tractor</option>
+                <option value="combine-harvester">Combine Harvester</option>
+                <option value="plough">Plough</option>
+            </select>
+            <input type="text" name="period" placeholder="Rental Period (in days)" required>
+            <button type="submit">Book Now</button>
+        </form>
+    </section>
+
+    <section id="payment">
+        <h2>Payment Details</h2>
+        <form id="payment-form">
+            <input type="text" name="card-number" placeholder="Card Number" required>
+            <input type="text" name="expiry-date" placeholder="Expiry Date (MM/YY)" required>
+            <input type="text" name="cvv" placeholder="CVV" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us for inquiries or support.</p>
+        <form>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p><strong>Email:</strong> gitam@edu</p>
+        <p><strong>Phone:</strong> 0891-9876543</p>
+        <p><strong>Address:</strong> GITAM UNIVERSITY, RUSHIKONDA, VISAKHAPATNAM</p>
+    </section>
+
+    <div class="popup" id="login-signup-popup">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="javascript:void(0)" onclick="switchToSignup()">Sign up here</a></p>
+
+        <div id="signup-form" style="display:none;">
+            <h2>Signup</h2>
+            <form>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Signup</button>
+            </form>
+            <p>Already have an account? <a href="javascript:void(0)" onclick="switchToLogin()">Login here</a></p>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        document.getElementById('overlay').addEventListener('click', function () {
+            hidePopup('login-signup-popup');
+        })
+
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function switchToSignup() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        function switchToLogin() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        // Handle booking form submission
+        document.getElementById('booking-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // You can add code here to process the form data (e.g., send it to a server)
+
+            // Hide the booking form and show the payment page
+            document.getElementById('booking').style.display = 'none';
+            document.getElementById('payment').style.display = 'block';
+        });
+
+        // Handle payment form submission (for demonstration purposes only)
+        document.getElementById('payment-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            alert('Payment processed successfully! (This is a demo)');
+
+            // You would typically redirect to a confirmation page or perform other actions here
+        });
+    </script>
+</body>
+
+</html>
